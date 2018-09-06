@@ -1,26 +1,22 @@
 # tumtum
+[![Build Status](https://api.travis-ci.com/NonaryR/tumtum.svg?branch=master)](https://travis-ci.com/NonaryR/tumtum)
 
-A [re-frame](https://github.com/Day8/re-frame) application designed to ... well, that part is up to you.
+1) Подключен travisCI
+2) Web-sockets при помощи [pneumatic-tubes](https://github.com/drapanjanas/pneumatic-tubes)
+3) Авторизация `buddy-auth`
+4) Все сообщения пишутся в Postges
+5) Приложение задеплоено на [digital ocean](http://207.154.234.84:8080/)
 
-## Development Mode
+## Разработка
 
-### Run application:
+Терминал один
 
 ```
-lein clean
+lein repl
+user.my=> (reset)
+```
+В втором терминале
+```
 lein figwheel dev
 ```
-
-Figwheel will automatically push cljs changes to the browser.
-
-Wait a bit, then browse to [http://localhost:3449](http://localhost:3449).
-
-## Production Build
-
-
-To compile clojurescript to javascript:
-
-```
-lein clean
-lein cljsbuild once min
-```
+[Откройте ссылку](http://localhost:8080).
