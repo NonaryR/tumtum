@@ -1,0 +1,13 @@
+{:subprotocol "postgresql"
+ :host #profile {:prod "//ec2-107-21-233-72.compute-1.amazonaws.com" :test "//tumtum_db"}
+ :port #profile {:prod 5432 :test 5432}
+ :database #profile {:prod "d1fq9tti0suc45" :test "chat_db"}
+ :subname #join [#ref [:host] ":"
+                 #ref [:port] "/"
+                 #ref [:database]]
+ :classname "org.postgresql.Driver"
+ :sslmode "require"
+ :secrets #include #join [#env PWD "/.secrets.edn"]
+ :user #ref [:secrets :user]
+ :password #ref [:secrets :password]
+ :app-port #profile {:prod 8080 :test 8080}}

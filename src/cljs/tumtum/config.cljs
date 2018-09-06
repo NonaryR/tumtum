@@ -1,0 +1,4 @@
+(ns tumtum.config)
+
+(def debug?
+  ^boolean goog.DEBUG)

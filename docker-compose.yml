@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+
+  tumtum_db:
+    image: db
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    ports:
+      - 8000:5432
+    volumes:
+      - ./mounts/db_data:/var/lib/postgresql/data
+    restart: always
+
+  app:
+    image: tumtum
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./opt/tumtum
+    depends_on:
+      - tumtum_db
+    ports:
+      - 8080:8080

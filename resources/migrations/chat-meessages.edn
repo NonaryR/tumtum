@@ -1,0 +1,2 @@
+{:up ["CREATE TABLE chat_messages (id SERIAL, chat text, author text, message text, date_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);"]
+ :down ["DROP TABLE IF EXISTS chat_messages CASCADE;"]}

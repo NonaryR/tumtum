@@ -1,0 +1,2 @@
+{:up ["CREATE TABLE authors (id SERIAL, author text PRIMARY KEY, password text);"]
+ :down ["DROP TABLE IF EXISTS authors CASCADE;"]}
