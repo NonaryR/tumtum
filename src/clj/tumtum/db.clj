@@ -12,7 +12,7 @@
   {:datasource
    (doto (ComboPooledDataSource.)
      (.setDriverClass (:classname spec))
-     (.setJdbcUrl (str "jdbc:" (:subprotocol spec) ":" (:subname spec) "?sslmode=" (:sslmode spec)))
+     (.setJdbcUrl (str "jdbc:" (:subprotocol spec) ":" (:subname spec)))
      (.setUser (:user spec))
      (.setPassword (:password spec))
      (.setMaxIdleTimeExcessConnections (* 30 60))
@@ -40,8 +40,6 @@
          (jdbc/query conn)
          (keep :chat)
          (distinct))))
-
-;; TODO macros and miltimethods
 
 (defn add-user! [conn & values]
   (let [exec (-> (h/insert-into :authors)

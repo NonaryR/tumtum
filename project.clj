@@ -1,4 +1,4 @@
-(defproject tumtum "0.1.0"
+(defproject tumtum "0.1.1"
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.10.339"]
                  [org.clojure/core.async "0.4.474"]
@@ -7,7 +7,6 @@
                  [mount "0.1.13"]
                  [aero "1.1.3"]
                  [ragtime "0.7.2"]
-                 [com.andrewmcveigh/cljs-time "0.5.2"]
                  [honeysql "0.9.3"]
                  [com.taoensso/timbre "4.10.0"]
                  [org.clojure/java.jdbc "0.7.7"]
