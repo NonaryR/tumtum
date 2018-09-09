@@ -94,8 +94,16 @@
                                :keywordize true}})
       (wrap-resource "/")))
 
+(defn at-shutdown
+  [f]
+  (-> (Runtime/getRuntime)
+      (.addShutdownHook (Thread. (bound-fn []
+                                   (log/info "Shutdown!")
+                                   (f))))))
+
+
 (defn start-server [port]
-  (log/info "Starting server")
+  (log/info "Starting server on port" port)
   (when-let [server (run-server #'server {:port port :join? false})]
     server))
 
@@ -112,4 +120,11 @@
 
 (defn -main [& args]
   (let [system (keyword (first args))]
-    (mount/start-with-args system)))
+    (mount/start-with-args system)
+    (log/info "Starting app!!")
+    (at-shutdown #(do (mount/stop)))
+    (while true
+      (Thread/sleep 100))))
+
+
+

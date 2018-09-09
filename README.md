@@ -4,19 +4,46 @@
 1) Подключен travisCI
 2) Web-sockets при помощи [pneumatic-tubes](https://github.com/drapanjanas/pneumatic-tubes)
 3) Авторизация `buddy-auth`
-4) Все сообщения пишутся в Postges
-5) Приложение задеплоено на [digital ocean](http://207.154.234.84:8080/)
+4) Все сообщения пишутся в postgres
+5) Приложение задеплоено на [digital ocean](http://207.154.234.84:8081/)
 
-## Разработка
+## Локальное тестирование
+```
+docker volume create --name=pgdata
+docker-compose up -d
+```
+[Откройте ссылку](http://localhost:8081).
 
-Терминал один
+Для остановки
+```
+docker-compose stop
+```
+
+## Локальная разработка
+Будем считать, что мы разработываем приложение в IDE, и нам необходим коннект к БД
+Сбилдим докер-контейнер для нее
+```
+# если вы использовали docker-compose из предыдущего шага, то контейнер уже собран, шаг с билдом можно пропустить
+docker build -f Dockerfile.db -t tumtum_db .
+docker run --name tdb --rm -d -p 15444:5432 tumtum_db
+```
+
+После чего:
+
+Терминал 1
 
 ```
 lein repl
 user.my=> (reset)
 ```
-В втором терминале
+Терминал 2
 ```
 lein figwheel dev
 ```
 [Откройте ссылку](http://localhost:8080).
+
+
+Остановить контейнер командой
+```
+docker stop tdb
+```
