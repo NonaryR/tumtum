@@ -18,7 +18,8 @@
                  [compojure "1.6.1"]
                  [ring "1.7.0-RC2"]
                  [ring/ring-defaults "0.3.2"]
-                 [http-kit "2.3.0"]]
+                 [http-kit "2.3.0"]
+                 [ring/ring-ssl "0.3.0"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
             [lein-cljfmt "0.6.0"]

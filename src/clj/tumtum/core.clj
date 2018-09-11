@@ -5,6 +5,7 @@
             [ring.util.response :refer [file-response]]
             [ring.middleware.defaults :refer [wrap-defaults]]
             [ring.middleware.resource :refer [wrap-resource]]
+            [ring.middleware.ssl :refer [wrap-ssl-redirect]]
             [pneumatic-tubes.core :refer [receiver wrap-handlers]]
             [pneumatic-tubes.httpkit :refer [websocket-handler]]
             [tumtum.db :refer [conn]]
@@ -92,7 +93,8 @@
   (-> handler
       (wrap-defaults {:params {:urlencoded true
                                :keywordize true}})
-      (wrap-resource "/")))
+      (wrap-resource "/")
+      (wrap-ssl-redirect)))
 
 (defn at-shutdown
   [f]
