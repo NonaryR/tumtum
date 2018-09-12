@@ -10,7 +10,7 @@
 ## Локальное тестирование
 ```
 docker volume create --name=pgdata
-docker-compose up -d
+docker-compose up --build -d
 ```
 [Откройте ссылку](http://localhost:8081).
 

@@ -19,7 +19,7 @@
      (.setMaxIdleTime (* 3 60 60)))})
 
 (defstate conn
-  :start (connect-db u/config)
+  :start (connect-db @u/config)
   :stop  (.close (:datasource conn)))
 
 (defn find-user [conn user]

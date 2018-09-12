@@ -18,5 +18,5 @@
 ;; all your's migrations in database is always up-to-date
 (defstate migrations
   :start (repl/migrate
-          {:datastore  (jdbc/sql-database config)
+          {:datastore  (jdbc/sql-database @config)
            :migrations (jdbc/load-resources "migrations")}))

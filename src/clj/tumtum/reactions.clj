@@ -1,7 +1,7 @@
 (ns tumtum.reactions
   (:require [taoensso.timbre :as log]
             [pneumatic-tubes.core :refer [transmitter dispatch find-tubes] :as tubes]
-            [tumtum.db :as db :refer [conn]]
+            [tumtum.db :as db]
             [clojure.core.async :refer [chan <!! thread]]))
 
 (def tx (transmitter #(log/info "Dispatching " %2 "to" %1)))
@@ -11,15 +11,15 @@
 (defn users-in-room [chat-room-name]
   (fn [tube] (= chat-room-name (:chat-room-name tube))))
 
-(defn- to-chats [tube user]
+(defn- to-chats [tube user conn]
   (dispatch-to tube [:choose-chat user (db/all-chats conn)]))
 
 (defn- confirm-authorization [tube name]
   (dispatch-to tube [:confirm-authorization name]))
 
-(defn confirm-user [tube user]
+(defn confirm-user [tube user conn]
   (confirm-authorization tube user)
-  (to-chats tube user))
+  (to-chats tube user conn))
 
 (defn error-login-user [tube user]
   (dispatch-to tube [:error-login user]))

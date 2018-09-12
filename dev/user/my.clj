@@ -3,6 +3,7 @@
             [mount.core :as mount]))
 
 (defn start []
+  (mount/in-cljc-mode)
   (mount/start-with-args :test))
 
 (defn stop []

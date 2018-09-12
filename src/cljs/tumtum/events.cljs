@@ -2,7 +2,17 @@
   (:require [re-frame.core :as re-frame :refer [reg-event-db]]
             [tumtum.db :as db]
             [day8.re-frame.tracing :refer-macros [fn-traced]]
-            [pneumatic-tubes.core :as tubes]))
+            [pneumatic-tubes.core :as tubes]
+            [tumtum.config :as config])
+  (:require-macros [mount.core :refer [defstate]]))
+
+(defn- config []
+  (if config/debug?
+    (:test config/ws)
+    (:prod config/ws)))
+
+(defstate web-sockets
+  :start (config))
 
 (defn on-receive [event-v]
   (.log js/console "received from server:" (str event-v))
@@ -20,7 +30,7 @@
 
 (def host (.-host js/location))
 
-(def tube (tubes/tube (str "ws://" host "/chat") on-receive on-connect on-disconnect on-connect-failed))
+(def tube (tubes/tube (str @web-sockets host "/chat") on-receive on-connect on-disconnect on-connect-failed))
 
 (def send-to-server (re-frame/after (fn [_ v] (tubes/dispatch tube v))))
 
