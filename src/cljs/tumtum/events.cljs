@@ -3,16 +3,17 @@
             [tumtum.db :as db]
             [day8.re-frame.tracing :refer-macros [fn-traced]]
             [pneumatic-tubes.core :as tubes]
+            [mount.core]
             [tumtum.config :as config])
   (:require-macros [mount.core :refer [defstate]]))
 
-(defn- config []
+(defn- ws-config []
   (if config/debug?
     (:test config/ws)
     (:prod config/ws)))
 
 (defstate web-sockets
-  :start (config))
+  :start (ws-config))
 
 (defn on-receive [event-v]
   (.log js/console "received from server:" (str event-v))
