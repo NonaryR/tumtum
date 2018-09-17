@@ -5,12 +5,12 @@
 2) Web-sockets при помощи [pneumatic-tubes](https://github.com/drapanjanas/pneumatic-tubes)
 3) Авторизация `buddy-auth`
 4) Все сообщения пишутся в postgres
-5) Приложение задеплоено на [digital ocean](http://207.154.234.84:8081/)
+5) Приложение задеплоено на `digital ocean` https://chatapp.nonaryr.com/
 
 ## Локальное тестирование
 ```
 docker volume create --name=pgdata
-docker-compose up --build -d
+docker-compose -f docker-compose.yml -f docker-compose.local.yml up --build -d
 ```
 [Откройте ссылку](http://localhost:8081).
 

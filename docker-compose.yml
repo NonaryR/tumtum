@@ -17,8 +17,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        build: "min"
     depends_on:
       - tumtum_db
+    command:
+      ["lein", "run", "prod"]
     ports:
       - 8081:8080
 

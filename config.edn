@@ -9,4 +9,4 @@
  :secrets #include #join [#env PWD "/.secrets.edn"]
  :user #ref [:secrets :user]
  :password #ref [:secrets :password]
- :app-port #profile {:prod 8080 :test 8080}}
+ :app-port 8080}

@@ -6,4 +6,3 @@ out
 /.*history
 /.lein-failures
 /.nrepl-port
-/hosts.md
